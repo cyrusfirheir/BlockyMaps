@@ -1,0 +1,49 @@
+
+@import "variables";
+
+a, a:visited {
+  display: inline-block;
+  user-select: none;
+  line-height: 2;
+  color: $fD;
+  background: $sS;
+  padding: 0.25rem 1rem;
+  margin: 1rem 0;
+  box-shadow: 1px 1px 0.25rem $shD;
+  transition: all 0.1s ease-out;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $fD;
+  position: relative;
+  z-index: 5;
+  box-shadow: 2px 2px 0.5rem $shD;
+}
+
+a:active {
+  background-color: $s;
+  background-image: none;
+  transition: all 0.1s ease-out;
+}
+
+button {
+	color: $fD;
+	background-color: $bS;
+	border-color: transparent;
+	transition: all 0.1s ease-out;
+	box-shadow: none;
+	&:hover {
+		background-color: $b;
+		border-color: $fD;
+	}
+	margin: 0.125rem;
+}
+
+button:disabled {
+	background-color: $b;
+	border-color: transparent;
+	&:hover {
+		border-color: transparent;
+	}
+}

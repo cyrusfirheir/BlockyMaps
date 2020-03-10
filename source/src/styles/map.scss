@@ -1,0 +1,130 @@
+
+@import "variables";
+
+#map-container {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
+	transform-origin: 50% 40%;
+	transition: transform 0.1s ease;
+
+	#map {
+		position: fixed;
+		z-index: 1200;
+		width: auto;
+		height: auto;
+		line-height: 0;
+		padding: 0.5em;
+		transition: all 0.1s ease;
+
+		.map-cell {
+			position: relative;
+			display: inline-block;
+			width: 3em;
+			height: 3em;
+			margin: 0.25em;
+			border: 0.15em solid $b;
+			border-radius: 0.5em;
+			transition: border-color 1s ease;
+
+			.content {
+				position: absolute;
+				display: inline-block;
+				top: -0.15em;
+				left: -0.15em;
+				width: 3em;
+				height: 3em;
+				padding: 0.25em;
+
+				.material-icons {
+					font-size: 2.5em;
+				}
+			}
+
+			&.wall {
+				border-color: $bD;
+			}
+
+			&.player {
+				border-color: $pD;
+				transition: border-color 0s;
+			}
+
+			&.invisible {
+				border-color: transparent;
+			}
+		}
+	}
+}
+
+#map-ui {
+	position: fixed;
+	z-index: 2000;
+	pointer-events: none;
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
+
+	#acts {
+		position: fixed;
+		z-index: 2200;
+		overflow-y: auto;
+		bottom: 2em;
+		right: 2em;
+		width: calc(40% - 2em);
+		min-height: 2em;
+		max-height: calc(100% - 4em);
+		padding: 0.5em;
+
+		a {
+			pointer-events: all;
+			width: 100%;
+			margin: 0.25em 0;
+		}
+	}
+
+	#name {
+		position: fixed;
+		z-index: 2200;
+		top: 2em;
+		left: 2em;
+		width: 30%;
+		height: 5em;
+		padding: 0.25em;
+
+		.content {
+			font-style: italic;
+			font-weight: bold;
+		}
+
+		border-left: 0.15em solid $fD;
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+
+	#desc {
+		position: fixed;
+		z-index: 2200;
+		top: 8em;
+		left: 2em;
+		width: 30%;
+		bottom: 2em;
+		padding: 0.25em;
+
+		border-left: 0.15em solid $fD;
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+
+	#pos {
+		position: fixed;
+		z-index: 2200;
+		top: 2em;
+		left: calc(30% + 3em);
+		padding: 0.25em;
+
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+}

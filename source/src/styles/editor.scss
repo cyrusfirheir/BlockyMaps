@@ -1,0 +1,238 @@
+
+@import "variables";
+
+#loading-cover {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $bS;
+	pointer-events: none;
+	opacity: 0;
+
+	transition: all 0.1s ease;
+
+	&.closed {
+		opacity: 1;
+	}
+}
+
+#editor-map-container {
+	position: fixed;
+	z-index: 2800;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	&.drag-true {
+		cursor: grab;
+		&:active {
+			cursor: grabbing;
+		}
+	}
+
+	#map-container {
+		position: absolute;
+
+		#map {
+			.map-cell {
+				&:hover, &.editing {
+					cursor: pointer;
+					outline: 0.15em solid $sD;
+					outline-offset: 0.1em;
+				}
+			}
+		}
+	}
+}
+
+#map-editor-link {
+	position: fixed;
+	z-index: 5000;
+	top: 0;
+	right: 0;
+}
+#play-map {
+	position: fixed;
+	z-index: 5000;
+	top: 0;
+	right: 0;
+}
+#re-center-map {
+	position: fixed;
+	z-index: 5000;
+	top: 5em;
+	right: 0;
+}
+#menu-link {
+	position: fixed;
+	z-index: 5000;
+	right: 0;
+	bottom: 10em;
+}
+#c-clipboard {
+	position: fixed;
+	z-index: 5000;
+	right: 0;
+	bottom: 5em;
+}
+#edit-map {
+	position: fixed;
+	z-index: 5000;
+	right: 0;
+	bottom: 0;
+}
+
+#json-editor {
+	position: fixed;
+	z-index: 3000;
+	top: 1em;
+	left: 1em;
+	width: calc(100% - 6em);
+	bottom: 1em;
+	pointer-events: all;
+
+	#editor-scrim {
+		position: fixed;
+		z-index: -1000;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: transparentize($color: #000000, $amount: 0.5);
+		transition: all 0.1s ease;
+	}
+
+	transition: all 0.1s ease;
+
+	&.closed {
+		margin-left: 100%;
+
+		#editor-scrim {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+
+	#cm-json-editor {
+		height: 100%;
+		width: 100%;
+
+		.CodeMirror {
+			color: $fD;
+			font-size: 0.75em;
+			overflow-y: auto;
+			height: 100%;
+
+			background-color: transparentize($color: #000000, $amount: 0.25);
+
+			border: 1px solid $s;
+			&:hover, &:focus {
+				border-color: $sD;
+			}
+		}
+	}
+}
+
+#current-edit-array {
+	position: fixed;
+	z-index: 3000;
+	top: 1em;
+	right: 5em;
+	width: 35%;
+	min-height: 3em;
+	padding: 0.5em;
+	background-color: transparentize($color: #000000, $amount: 0.25);
+	border: 1px solid $fD;
+
+	.content {
+		user-select: all;
+		font-size: 0.75em;
+	}
+}
+
+#object-editor {
+	position: fixed;
+	z-index: 3000;
+	top: 1em;
+	left: 1em;
+	width: 35%;
+	bottom: 1em;
+	pointer-events: none;
+	transition: all 0.1s ease;
+
+	&.closed {
+		margin-left: 100%;
+	}
+
+	.ui-accordion-header, .ui-accordion-header-collapsed {
+		font-family: $fBody;
+		color: $fD;
+		background-color: transparentize($color: #ffffff, $amount: 0.9);
+		border: 1px solid $fD;
+		margin-bottom: 1em;
+		pointer-events: all;
+		font-size: 0.75em;
+		text-transform: uppercase;
+		padding: 1em 0;
+
+		&:hover {
+			border-color: $s;
+		}
+	}
+
+	.ui-accordion-header-active {
+		background-color: transparentize($color: #000000, $amount: 0.25);
+		border-color: $sD;
+	}
+
+	.ui-accordion-content {
+		font-family: $fBody;
+		background-color: transparentize($color: #000000, $amount: 0.25);
+		color: $fD;
+		border: 1px solid $sD;
+		margin-top: -0.5em;
+		margin-left: 0.5em;
+		margin-bottom: 1.5em;
+		max-height: calc(100% - 13em);
+		overflow-y: auto;
+	}
+
+	div {
+		font-size: 0.75em;
+		pointer-events: all;
+		padding: 1em;
+
+		input, textarea {
+			display: block;
+			margin-top: 0.25em;
+			margin-left: 1em;
+			margin-bottom: 0.5em;
+			min-width: calc(100% - 1em);
+			max-width: calc(100% - 1em);
+
+			font-family: $fBody;
+
+	    border: 0.15rem solid $bS;
+	    background-color: $bD;
+	    color: $fD;
+
+	    &:hover {
+	      background-color: $bS;
+	      border-color: $sD;
+	    }
+
+	    &:active, &:focus {
+	      border-color: $bD;
+	      background-color: $bS;
+	    }
+		}
+
+		textarea {
+			min-height: 10em;
+		}
+	}
+}

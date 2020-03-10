@@ -1,0 +1,14 @@
+:: StoryTitle
+Blocky Maps
+
+:: StoryData
+{
+	"ifid": "EDF3A04F-1DC6-4688-8F8E-85ADBF91C240",
+	"format": "SugarCube",
+	"format-version": "2.30.0"
+}
+
+:: Start
+
+<<set $curMap = Story.get("mapTemplate").text>>
+<<goto "editMap">>

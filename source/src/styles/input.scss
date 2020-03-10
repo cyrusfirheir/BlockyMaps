@@ -1,0 +1,21 @@
+
+@import "variables";
+
+input {
+  &.macro-textbox {
+		display: block;
+    border: 0.15rem solid $bS;
+    background-color: $bD;
+    color: $fD;
+
+    &:hover {
+      background-color: $bS;
+      border-color: $sD;
+    }
+
+    &:active, &:focus {
+      border-color: $bD;
+      background-color: $bS;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+:: editor-menu
+
+Blocky Maps v<<= App.version>>
+
+<br><br>
+
+<<button "Restart with new map">>
+	<<run UI.restart()>>
+<</button>>
+
+<br>
+
+<input id="load-JSON" type="file" style="display: none;" accept=".json">
+<<button "Import map JSON">>
+	<<run $("#load-JSON").trigger("click")>>
+<</button>>
+
+<br>
+
+<span title="File name:&#13;&#10;
+		_map-[mapID]-[dateStamp].json">
+	<<button "Export current map">>
+		<<run exportJSON()>>
+	<</button>>
+</span>

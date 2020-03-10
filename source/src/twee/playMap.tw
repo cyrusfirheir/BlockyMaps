@@ -1,0 +1,37 @@
+:: playMap
+
+<div id="loading-cover" class="closed"></div>
+
+<<set $mapEdit = false>>
+
+<<if $editorMode>>
+	<div title="Edit the map" id="map-editor-link" class="material-button">
+		<i class="material-icons">edit</i>
+	</div>
+<</if>>
+
+<div id="map-container">
+	<<= drawMap($curMap)>>
+</div>
+
+<div id="map-ui">
+	<div id="name">
+		<div class="content"></div>
+	</div>
+	<div id="desc">
+		<div class="content"></div>
+	</div>
+	<div id="pos">
+		<div class="content"></div>
+	</div>
+	<div id="acts"></div>
+</div>
+
+<<timed 200ms>>
+	<<script>>
+		pMove("up", 0);
+		setup.zoomLevel = variables().curMap.zoom;
+		mapZoom(setup.zoomLevel);
+		$("#loading-cover").removeClass("closed");
+	<</script>>
+<</timed>>

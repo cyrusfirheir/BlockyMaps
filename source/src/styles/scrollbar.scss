@@ -1,0 +1,25 @@
+
+@import "variables";
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+
+	&:hover {
+		background: $b;
+	}
+}
+
+::-webkit-scrollbar-thumb {
+  box-sizing: content-box;
+  background: $s;
+  border-radius: 0.5rem;
+
+	&:hover {
+		background: $sD;
+	}
+}

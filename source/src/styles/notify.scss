@@ -1,0 +1,42 @@
+
+@import "variables";
+/*
+    notify.min.css, by chapel; for use with notify.js
+    version 1.0.0
+ */
+#notify {
+  font-style: italic;
+  text-align: right;
+  position : fixed;
+  display : block;
+  z-index: -50;
+	top : -4rem;
+	left : 15%;
+	width : 70%;
+  padding : 0.5rem 1rem;
+  background-color : transparent;
+  color : transparent;
+  transition : top 0.1s ease;
+
+	&.open {
+	  z-index: 5000;
+		top: 2rem;
+	  background-color : $pD;
+	  color : $fS;
+	  border: 1px solid $shD;
+		box-shadow: 1px 1px 1rem $shD;
+
+		&.danger {
+			background-color: $aD;
+		}
+		&.success {
+			background-color: $aS;
+		}
+		&.warn {
+			background-color: $aW;
+		}
+		&.info {
+			background-color: $aI;
+		}
+	}
+}

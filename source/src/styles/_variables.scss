@@ -1,0 +1,41 @@
+
+//adds references to CSS variables within SCSS variables
+
+//primary colors and depths
+$pS: var(--primary-shallow);
+$p: var(--primary);
+$pD: var(--primary-deep);
+
+//secondary color and depths
+$sS: var(--secondary-shallow);
+$s: var(--secondary);
+$sD: var(--secondary-deep);
+
+//backgrounds and elevations
+$bS: var(--back-shallow);
+$b: var(--back);
+$bD: var(--back-deep);
+
+//shadows
+$sh: var(--shadow);
+$shD: var(--shadow-deep);
+
+//alert-colors
+$aD: var(--danger);
+$aDD: var(--dangerDark);
+$aW: var(--warning);
+$aWD: var(--warningDark);
+$aS: var(--success);
+$aSD: var(--successDark);
+$aI: var(--info);
+$aID: var(--infoDark);
+
+//font colors
+$fS: var(--font-shallow);
+$fD: var(--font-deep);
+
+//font variables
+$fBody: var(--body-font);
+
+//universal rounded corners
+$rounded: var(--rounded);

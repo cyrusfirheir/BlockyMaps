@@ -1,0 +1,17 @@
+:: mapTemplate
+
+{
+	"id": "",
+	"size": {
+		"rows": 3,
+		"cols": 3
+	},
+	"zoom": 1,
+	"default": {
+		"name": "",
+		"desc": ""
+	},
+	"r1c1": {
+		"cssClass": "player"
+	}
+}

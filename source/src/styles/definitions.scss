@@ -1,0 +1,48 @@
+
+@import "fonts";
+@import "variables";
+
+:root {
+  //primary color and depths
+	--primary-shallow: #78002e;
+  --primary: #ad1457;
+  --primary-deep: #e35183;
+
+  //secondary color and depths
+	--secondary-shallow: #005662;
+  --secondary: #00838f;
+  --secondary-deep: #4fb3bf;
+
+  //backgrounds and elevations
+	--back-shallow: #152126;
+  --back: #263238;
+  --back-deep: #3e4f59;
+
+  //shadows
+  --shadow: #090b0d;
+  --shadow-deep: #020203;
+
+	//alert-colors
+	--danger: #ff4444;
+	--dangerDark: #cc0000;
+	--warning: #ffbb33;
+	--warningDark: #ff8800;
+	--success: #00c851;
+	--successDark: #007e33;
+	--info: #33b5e5;
+	--infoDark: #0099cc;
+
+  //font colors
+	--font-shallow: #000a12;
+  --font-deep: #c1d5e0;
+
+  //font variables
+  --body-font: "Roboto Mono", monospace;
+
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px)/(1600 - 300)));
+
+  //universal rounded corners
+  --rounded: 0.175rem;
+
+}

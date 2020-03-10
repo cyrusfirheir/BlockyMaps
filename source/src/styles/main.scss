@@ -1,0 +1,32 @@
+
+@import "variables";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-radius: $rounded;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-drag: none;
+	user-select: none;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: $bS;
+  color: $fD;
+  font-family: $fBody;
+  font-weight: normal;
+	vertical-align: middle;
+}
+
+hr { border-color: $pS; }
+
+#story {
+  position: absolute;
+  width: 100%;
+}
+
+#passages {
+  max-width: 100%;
+  margin: 2.5rem 3rem;
+}

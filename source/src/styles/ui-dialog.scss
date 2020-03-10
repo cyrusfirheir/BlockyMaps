@@ -1,0 +1,100 @@
+
+@import "variables";
+
+#ui-overlay {
+	&.open {
+		transition: all 0.1s ease;
+	}
+}
+#ui-dialog {
+	font-size: 0.8rem;
+	min-width: 50%;
+	max-width: calc(100% - 1rem);
+	box-shadow: 0 0 0.5rem $shD;
+}
+#ui-dialog-titlebar {
+	background-color: $pS;
+	color: $fD;
+	min-height: 24px;
+}
+#ui-dialog-title {
+	padding: 1rem;
+	text-align: left;
+}
+#ui-dialog-body {
+	overflow: auto;
+	max-height: calc(100% - 3.5rem);
+	background-color: $bD;
+	border: none;
+	text-align: left;
+	line-height: 1.5;
+
+	&.editor-menu {
+		button {
+			display: block;
+			width: 100%;
+		}
+	}
+}
+#ui-dialog-body hr {
+	background-color: $pD;
+}
+
+#ui-dialog-body.saves .empty {
+	text-align: justify;
+}
+#ui-dialog-body.saves tr:not(:first-child) {
+  border-color: $pD;
+}
+#ui-dialog-body.saves>:not(:first-child) {
+  border-color: $pD;
+}
+#ui-dialog-body.saves {
+	.buttons {
+		display: none;
+	}
+}
+#save-ops {
+	padding: 0.25rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+#ui-dialog-body.settings {
+	padding: 0.25rem;
+
+	[id|=setting-label] {
+		display: table-caption;
+	}
+
+	select {
+		transition: all 0.1s ease;
+		width: 100%;
+		background-color: $bS;
+		&:hover {
+			background-color: $bD;
+		}
+	}
+
+	input[type=range][id|=setting-control] {
+		max-width: 100%;
+	}
+
+	div[id|=header-body]:not(:first-child) {
+		border-color: $pD;
+	}
+}
+
+#ui-dialog-close {
+	height: 100%;
+	width: 4rem;
+	text-align: center;
+}
+button#ui-dialog-close {
+	background-color: transparent;
+	text-shadow: 0 0 0.1rem $fS;
+	margin: 0;
+	&:hover {
+		background-color: $aD;
+	}
+}
