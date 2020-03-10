@@ -1,5 +1,6 @@
 source/src/styles/css
 concepts
 
-.atom-live-server.json
+_export
+
 *.bat
