@@ -4,15 +4,15 @@
 
 <div id="editor-map-container">
 	<div id="map-container">
-		<<= drawMap($curMap)>>
+		<<= setup.bm.drawMap($curMap)>>
 	</div>
 </div>
 
 <<timed 200ms>>
 	<<script>>
-		cameraFollow("#r0c0");
+		setup.bm.cameraFollow(".player");
 		setup.zoomLevel = variables().curMap.zoom;
-		mapZoom(setup.zoomLevel);
+		setup.bm.mapZoom(setup.zoomLevel);
 		$("#loading-cover").removeClass("closed");
 		mapEditorInit();
 	<</script>>

@@ -1,0 +1,186 @@
+
+@import "variables";
+
+#loading-cover {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #152126;
+	pointer-events: none;
+	opacity: 0;
+
+	transition: all 0.1s ease;
+
+	&.closed {
+		opacity: 1;
+	}
+}
+
+#map-container {
+
+	*, *::before, *::after {
+	  box-sizing: border-box;
+	}
+
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
+	transform-origin: 50% 40%;
+	transition: transform 0.1s ease;
+}
+
+#map {
+	position: fixed;
+	z-index: 1200;
+	width: auto;
+	height: auto;
+	line-height: 0;
+	padding: 0.5em;
+	transition: all 0.1s ease;
+
+	.map-cell {
+		position: relative;
+		display: inline-block;
+		width: 3em;
+		height: 3em;
+		margin: 0.25em;
+		border: 0.15em solid #263238;
+		border-radius: 0.5em;
+		transition: border-color 1s ease;
+
+		.content {
+			position: absolute;
+			display: inline-block;
+			top: -0.15em;
+			left: -0.15em;
+			width: 3em;
+			height: 3em;
+			padding: 0.25em;
+
+			.material-icons {
+				font-size: 2.5em;
+			}
+		}
+
+		&.wall {
+			border-color: #3e4f59;
+		}
+
+		&.player {
+			position: relative;
+			z-index: 100;
+			border-color: #e35183;
+			transition: border-color 0s;
+			overflow: hidden;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+				top: 0.75em;
+				width: 6em;
+				height: 1em;
+				border-radius: 0;
+				background-color: #e35183;
+				opacity: 0.5;
+				transform: rotate(-45deg);
+				animation: shine 1s ease infinite;
+			}
+			&::after {
+				animation: shine 2s ease infinite;
+			}
+		}
+
+		&.invisible {
+			border-color: transparent;
+			background: none;
+		}
+	}
+}
+
+@keyframes shine {
+	0% {
+		left: -5.5em;
+	}
+	50% {
+		left: 2.5em;
+	}
+	100% {
+		left: 2.5em;
+	}
+}
+
+#map-ui {
+	position: fixed;
+	z-index: 2000;
+	pointer-events: none;
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
+
+	#acts {
+		position: fixed;
+		z-index: 2200;
+		overflow-y: auto;
+		bottom: 2em;
+		right: 2em;
+		width: calc(40% - 2em);
+		min-height: 2em;
+		max-height: calc(100% - 4em);
+		padding: 0.5em;
+
+		a {
+			display: block;
+			pointer-events: all;
+			width: 100%;
+			margin: 0.25em 0;
+		}
+	}
+
+	#name {
+		position: fixed;
+		z-index: 2200;
+		top: 2em;
+		left: 2em;
+		width: 30%;
+		height: 5em;
+		padding: 0.25em;
+
+		.content {
+			font-style: italic;
+			font-weight: bold;
+		}
+
+		border-left: 0.15em solid #c1d5e0;
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+
+	#desc {
+		position: fixed;
+		z-index: 2200;
+		top: 8em;
+		left: 2em;
+		width: 30%;
+		bottom: 2em;
+		padding: 0.25em;
+
+		border-left: 0.15em solid #c1d5e0;
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+
+	#pos {
+		position: fixed;
+		z-index: 2200;
+		top: 2em;
+		left: calc(30% + 3em);
+		padding: 0.25em;
+
+		background-color: transparentize($color: #000000, $amount: 0.5);
+	}
+}

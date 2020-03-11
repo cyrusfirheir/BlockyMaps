@@ -1,0 +1,131 @@
+:: demo
+
+{
+	"id": "bmShowCase01",
+	"size": {
+		"rows": 5,
+		"cols": 9
+	},
+	"zoom": 1,
+	"cssClass": "cusMap01",
+	"default": {
+		"cssClass": "tiled",
+		"name": "Dorm 3C",
+		"desc": "\nIt's the middle of the night.\n\nThis is where the guys wanted to meet. You can see them up ahead. Who knows what they want?"
+	},
+	"r0c0": {
+		"cssClass": "invisible solid"
+	},
+	"r0c1": {
+		"cssClass": "solid wall"
+	},
+	"r0c2": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: lavenderblush;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 301",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r0c3": {
+		"cssClass": "solid wall"
+	},
+	"r0c4": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: palegreen;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 302",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r0c5": {
+		"cssClass": "solid wall"
+	},
+	"r0c6": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: powderblue;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 303",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r0c7": {
+		"cssClass": "solid wall"
+	},
+	"r0c8": {
+		"cssClass": "invisible solid"
+	},
+	"r1c0": {
+		"cssClass": "solid wall"
+	},
+	"r1c8": {
+		"cssClass": "solid wall"
+	},
+	"r2c0": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: azure;\"\n>\nmeeting_room\n</i>",
+		"name": "Exit",
+		"desc": "\nLeave the dorm?",
+		"acts": [
+			{
+				"name": "Leave",
+				"func": "<<run UI.alert(\"Assume that it works because there exists no hall right now. Didn't code it in.\")>>"
+			}
+		]
+	},
+	"r2c1": {
+		"cssClass": "tiled player"
+	},
+	"r2c6": {
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: hotpink;\"\n>\nsupervised_user_circle\n</i>",
+		"css": "text-shadow: 0 0 1em red;",
+		"name": "Da Bois",
+		"desc": "\nThis is it.\n\nThey're the ones waiting for you... Introduce yourself?",
+		"acts": [
+			{
+				"name": "Doit",
+				"func": "<<run UI.alert(\"Diddit\")>>"
+			}
+		]
+	},
+	"r2c8": {
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: lightsteelblue;\"\n>\nwc\n</i>",
+		"cssClass": "wall"
+	},
+	"r3c0": {
+		"cssClass": "solid wall"
+	},
+	"r3c8": {
+		"cssClass": "solid wall"
+	},
+	"r4c0": {
+		"cssClass": "invisible solid"
+	},
+	"r4c1": {
+		"cssClass": "solid wall"
+	},
+	"r4c2": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: lavenderblush;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 304",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r4c3": {
+		"cssClass": "solid wall"
+	},
+	"r4c4": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: palegreen;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 305",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r4c5": {
+		"cssClass": "solid wall"
+	},
+	"r4c6": {
+		"cssClass": "wall",
+		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: powderblue;\"\n>\nmeeting_room\n</i>",
+		"name": "Room No. 306",
+		"desc": "\nYou don't know anyone in the 3rd year that lives here; probably shouldn't poke around."
+	},
+	"r4c7": {
+		"cssClass": "solid wall"
+	},
+	"r4c8": {
+		"cssClass": "invisible solid"
+	}
+}

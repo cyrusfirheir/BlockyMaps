@@ -45,7 +45,7 @@ $("html").on("click", "#re-center-map", () => {
 
 $("html").on("click", "#play-map", () => {
 	variables().editorMode = true;
-	$.wiki(`<<goto "playMap">>`);
+	$.wiki(`<<goto "bmPlayMap">>`);
 });
 
 $("html").on("click", "#map-editor-link", () => {
@@ -165,9 +165,9 @@ $("html").on("change", "input, textarea", function() {
 			variables().curMap.default.css = $(this).val();
 			break;
 		case "cd-acts":
-			let _c = $(this).val();
+			let _c = $(this).val().replace(/[\r\n]+/g, " ");
 			try {
-				_c = JSON.parse(_c);
+				_c = JSON.parse();
 			} catch(error) {
 				setup.notify(
 					`<i class="material-icons">warning</i> Malformed JSON!<br> Reverting to last stable version.`
@@ -206,7 +206,7 @@ $("html").on("change", "input, textarea", function() {
 			break;
 		case "cs-acts":
 			for (let el of editArr) {
-				let _c = $(this).val();
+				let _c = $(this).val().replace(/[\r\n]+/g, " ");
 				try {
 					_c = JSON.parse(_c);
 				} catch(error) {
@@ -245,10 +245,10 @@ $("html").on("blur", "#json-editor", () => {
 
 
 window.redrawMap = function() {
-	$("#editor-map-container #map-container").empty().wiki(drawMap(variables().curMap));
-	cameraFollow("#r0c0");
+	$("#editor-map-container #map-container").empty().wiki(setup.bm.drawMap(variables().curMap));
+	setup.bm.cameraFollow(".player");
 	setup.zoomLevel = variables().curMap.zoom;
-	mapZoom(setup.zoomLevel);
+	setup.bm.mapZoom(setup.zoomLevel);
 	State.create(State.passage);
 	for (let el of editArr) {
 		$(`.map-cell#${el}`).addClass("editing");

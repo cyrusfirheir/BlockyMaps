@@ -1,0 +1,212 @@
+
+;(function() {
+	/*
+  * Blocky Maps, by Cyrus Firheir; for SugarCube v2
+  * v0.1.0
+  * requires _bm-styles.css and _bm-passage-twee.tw/_bm-passage-twine.txt
+  */
+
+	let _bm = {};
+
+	_bm.version = "0.1.0";
+
+	/* accepts either valid JSON, or plain JS objects */
+	_bm.drawMap = function(mapObj) {
+		if (typeof mapObj === "string") mapObj = JSON.parse(mapObj);
+		variables().curMap = mapObj;
+		let rows = mapObj.size.rows;
+		let cols = mapObj.size.cols;
+		let ret = "";
+		ret += `<div id="map" class="${mapObj.cssClass ? mapObj.cssClass : ""}">`;
+		for (let r = 0; r < rows; r++) {
+			for (let c = 0; c < cols; c++) {
+				let cell = `r${r}c${c}`;
+				let css, cssClass, _css, _cssClass;
+				let content = "";
+				if (mapObj.default) {
+					_css = mapObj.default.css;
+					_cssClass = mapObj.default.cssClass;
+					content = mapObj.default.content
+										? mapObj.default.content : content;
+				}
+				if (mapObj[cell]) {
+					css = mapObj[cell].css;
+					cssClass = mapObj[cell].cssClass;
+					content = mapObj[cell].content
+										? mapObj[cell].content : content;
+				}
+				ret += `<span	id="${cell}"
+									class="map-cell	${cssClass? cssClass : _cssClass ? _cssClass : ""}"
+									style="${css ? css : _css ? _css : ""}">
+									<span class="content">${content}</span>
+								</span>`;
+				if (c === cols - 1) ret += `<br>`;
+			}
+		}
+		ret += `</div>`;
+		ret = ret.replace(/[\r\n\s]+/g, " ");
+		return ret;
+	};
+
+	_bm.cameraFollow = function(target = "#r0c0") {
+		let _t = $(`#map-container #map ${target}`);
+		if (!_t.length) _t = $(`#map-container #map #r0c0`);
+		let _pos = _t.attr("id")
+									.replace(/r([0-9]+)?c([0-9]+)?/, "$1_$2")
+									.split("_")
+									.map(el => Number(el));
+		let _map = $("#map-container #map");
+		let _padding = _map.css("padding");
+		let _margin = _t.css("margin");
+		let _w = _t.css("width");
+		let _h = _t.css("height");
+		let _o = $("#map-container").css("transform-origin").split(" ");
+		let size = variables().curMap.size;
+
+		_map.css({
+			"top": `calc(${_o[1]} - (${_pos[0]} * ${_h}) - (${_h}/2) - (${_pos[0]} * ${_margin} * 2) - ${_padding})`,
+			"left": `calc(${_o[0]} - (${_pos[1]} * ${_w}) - (${_w}/2) - (${_pos[1]} * ${_margin} * 2) - ${_padding})`,
+			"min-width": `calc((${size.cols} * (${_w} + (${_margin} * 2)) + 1.5em)`,
+			"min-height": `calc((${size.rows} * (${_h} + (${_margin} * 2)) + 1.5em)`
+		});
+	};
+
+	setup.zoomLevel = 1;
+
+	_bm.mapZoom = function(level = 1) {
+		let _t = $("#map-container");
+		if (!_t.length) return;
+		_t.css({
+			"transform": `scale(${level})`
+		});
+	};
+
+	/*
+	pMoveCoords(coords) -> Accepts three kinds of input
+		As a string of the format "r(row)c(column)":
+			pMoveCoords("r0c0");
+		As an array of the format [row, column]:
+			pMoveCoords([0, 2]);
+		As an object of the format {row: row, col: column}:
+			pMoveCoords({row: 2, col: 3});
+	Override can be passed a truthy value so that player can move into a solid block.
+	*/
+	_bm.pMoveCoords = function(coords, override=false) {
+		let _p = $("#map-container #map .player");
+		if (!_p.length) return;
+		let _t = _p;
+		switch (typeof coords) {
+			case "string":
+				_t = coords.trim() ? $(`#map-container #map #${coords}`) : _p;
+				break;
+			case "object":
+				if (Array.isArray(coords)) {
+					_t = $(`#map-container #map #r${coords[0]}c${coords[1]}`);
+				} else {
+					_t = $(`#map-container #map #r${coords.row}c${coords.col}`);
+				}
+				break;
+		}
+		if (_t.length) {
+			if (!_t.hasClass("solid") || override) {
+				_p.removeClass("player");
+				_t.addClass("player");
+			}
+		}
+		$(document).trigger(":map-moved");
+	};
+
+	_bm.pMove = function(dir, dist=1) {
+		if (!$("#map-container #map .player").length || variables().mapEdit) return;
+		let rMove = 0;
+		let cMove = 0;
+		switch (dir) {
+			case "up": 			rMove = -1; 	break;
+			case "down": 		rMove = 1; 		break;
+			case "left": 		cMove = -1; 	break;
+			case "right": 	cMove = 1; 		break;
+		}
+		for (let d = 0; d < dist; d++) {
+			let _p = $("#map-container #map .player");
+			let _cur = _p.attr("id")
+										.replace(/r([0-9]+)?c([0-9]+)?/, "$1_$2")
+										.split("_")
+										.map(el => Number(el));
+			_bm.pMoveCoords([
+				_cur[0] + rMove,
+				_cur[1] + cMove
+			]);
+		}
+		$(document).trigger(":map-moved");
+	};
+
+	_bm.gotoMap = function(mapObj) {
+		variables().curMap = mapObj;
+		$.wiki(`<<goto "playMap">>`);
+	};
+
+	setup.bm = Object.freeze(_bm);
+}());
+
+
+$(window).on("resize", () => $(document).trigger(":map-moved"));
+
+$(document).on(":map-moved", function() {
+	setup.bm.cameraFollow(".player");
+
+	$("#map-ui #acts").empty();
+	$("#map-ui #name .content").empty();
+	$("#map-ui #desc .content").empty();
+
+	let _def = variables().curMap.default;
+	if (_def) {
+		if (_def.acts) {
+			$("#map-ui #acts").wiki(_def.acts.reduce((a, c) => {
+				return a + `<<link "${c.name}">>${c.func}<</link>>`;
+			}, ""));
+		}
+		if (_def.name) $("#map-ui #name .content").wiki(_def.name);
+		if (_def.desc) $("#map-ui #desc .content").wiki(_def.desc);
+	}
+
+	let _p = $("#map-container #map .player").attr("id");
+	variables().curPos = _p;
+	$("#map-ui #pos .content").empty().wiki(_p);
+
+	let _cur = variables().curMap[_p];
+	if (!_cur) return;
+	if (_cur.acts) {
+		$("#map-ui #acts").empty().wiki(_cur.acts.reduce((a, c) => {
+			return a + `<<link "${c.name}">>${c.func}<</link>>`;
+		}, ""));
+	}
+	if (_cur.name) $("#map-ui #name .content").empty().wiki(_cur.name);
+	if (_cur.desc) $("#map-ui #desc .content").empty().wiki(_cur.desc);
+});
+
+$(document).on("keydown", function(ev) {
+	switch (ev.code) {
+		case "KeyW": case "ArrowUp":
+			setup.bm.pMove("up");
+			break;
+		case "KeyS": case "ArrowDown":
+			setup.bm.pMove("down");
+			break;
+		case "KeyA": case "ArrowLeft":
+			setup.bm.pMove("left");
+			break;
+		case "KeyD": case "ArrowRight":
+			setup.bm.pMove("right");
+			break;
+		case "PageDown":
+			setup.zoomLevel -= 0.1;
+			setup.zoomLevel = setup.zoomLevel.clamp(0.1, 2.5);
+			setup.bm.mapZoom(setup.zoomLevel);
+			break;
+		case "PageUp":
+			setup.zoomLevel += 0.1;
+			setup.zoomLevel = setup.zoomLevel.clamp(0.1, 2.5);
+			setup.bm.mapZoom(setup.zoomLevel);
+			break;
+	}
+});

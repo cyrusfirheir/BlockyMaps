@@ -1,24 +1,6 @@
 
 @import "variables";
 
-#loading-cover {
-	position: fixed;
-	z-index: 10000;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: $bS;
-	pointer-events: none;
-	opacity: 0;
-
-	transition: all 0.1s ease;
-
-	&.closed {
-		opacity: 1;
-	}
-}
-
 #editor-map-container {
 	position: fixed;
 	z-index: 2800;

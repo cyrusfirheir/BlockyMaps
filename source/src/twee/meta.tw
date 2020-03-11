@@ -11,4 +11,8 @@ Blocky Maps
 :: Start
 
 <<set $curMap = Story.get("mapTemplate").text>>
+<<if window.location.hash === "#demo">>
+	<<set $curMap = Story.get("demo").text>>
+<</if>>
+
 <<goto "editMap">>

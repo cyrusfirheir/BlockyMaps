@@ -1,4 +1,4 @@
-:: playMap
+:: bmPlayMap
 
 <div id="loading-cover" class="closed"></div>
 
@@ -11,7 +11,7 @@
 <</if>>
 
 <div id="map-container">
-	<<= drawMap($curMap)>>
+	<<= setup.bm.drawMap($curMap)>>
 </div>
 
 <div id="map-ui">
@@ -29,9 +29,9 @@
 
 <<timed 200ms>>
 	<<script>>
-		pMove("up", 0);
+		setup.bm.pMove("up", 0);
 		setup.zoomLevel = variables().curMap.zoom;
-		mapZoom(setup.zoomLevel);
+		setup.bm.mapZoom(setup.zoomLevel);
 		$("#loading-cover").removeClass("closed");
 	<</script>>
 <</timed>>
