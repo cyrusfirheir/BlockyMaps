@@ -11,7 +11,7 @@
 	"default": {
 		"cssClass": "tiled",
 		"name": "Dorm 3C",
-		"desc": "\nIt's the middle of the night.\n\nThis is where the guys wanted to meet. You can see them up ahead. Who knows what they want?"
+		"desc": "\nIt's the middle of the night.\n\nThis is where the guys wanted to meet. You can see them up ahead. Who knows what they want?\n\nUse WASD or arrow keys to move."
 	},
 	"r0c0": {
 		"cssClass": "invisible solid"
