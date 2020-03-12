@@ -351,7 +351,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		Columns:
 			&lt;input id=&quot;mm-size-cols&quot; type=&quot;text&quot;&gt;
 
-		&lt;span title=&quot;Set the zoom multiplier at which the map is loaded onto screen during play.&amp;#13;&amp;#10;Default value is 1. Recommended to keep between 0.25 and 2.5&quot;&gt;
+		&lt;span title=&quot;Set the zoom multiplier at which the map is loaded onto screen during play.&amp;#13;&amp;#10;Default value is 100. Recommended to keep between 25 and 250&quot;&gt;
 			&lt;i class=&quot;material-icons&quot;&gt;help&lt;/i&gt;
 		&lt;/span&gt;
 		Map zoom level:
@@ -410,17 +410,8 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		Inline CSS:
 			&lt;textarea id=&quot;cd-inline&quot;&gt;&lt;/textarea&gt;
 
-		&lt;span title=&quot;A list of links that show up for every block on the map.&amp;#13;&amp;#10;Use an array of JSON objects.&quot;&gt;
+		&lt;span title=&quot;Markup that is rendered to the &#39;actions&#39; section of the UI for every block.&amp;#13;&amp;#10;Use regular SugarCube code for links/buttons/etc.&quot;&gt;
 			&lt;i class=&quot;material-icons&quot;&gt;help&lt;/i&gt;
-		&lt;/span&gt;
-		&lt;span title=&quot;Example:&amp;#13;&amp;#10;
-		[&amp;#13;&amp;#10;
-			{&amp;#13;&amp;#10;
-				&amp;quot;name&amp;quot;: &amp;quot;Name of link&amp;quot;,&amp;#13;&amp;#10;
-				&amp;quot;func&amp;quot;: &amp;quot;&lt;&lt;SugarCube Macro&gt;&gt;&amp;quot;&amp;#13;&amp;#10;
-			}&amp;#13;&amp;#10;
-		]&quot;&gt;
-			&lt;i class=&quot;material-icons&quot;&gt;info&lt;/i&gt;
 		&lt;/span&gt;
 		Actions:
 			&lt;textarea id=&quot;cd-acts&quot;&gt;&lt;/textarea&gt;
@@ -469,17 +460,8 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		Inline CSS:
 			&lt;textarea id=&quot;cs-inline&quot;&gt;&lt;/textarea&gt;
 
-		&lt;span title=&quot;A list of links that show up for the selected block(s) on the map.&amp;#13;&amp;#10;Use an array of JSON objects.&quot;&gt;
+		&lt;span title=&quot;Markup that is rendered to the &#39;actions&#39; section of the UI for the selected block(s).&amp;#13;&amp;#10;Use regular SugarCube code for links/buttons/etc.&quot;&gt;
 			&lt;i class=&quot;material-icons&quot;&gt;help&lt;/i&gt;
-		&lt;/span&gt;
-		&lt;span title=&quot;Example:&amp;#13;&amp;#10;
-		[&amp;#13;&amp;#10;
-			{&amp;#13;&amp;#10;
-				&amp;quot;name&amp;quot;: &amp;quot;Name of link&amp;quot;,&amp;#13;&amp;#10;
-				&amp;quot;func&amp;quot;: &amp;quot;&lt;&lt;SugarCube Macro&gt;&gt;&amp;quot;&amp;#13;&amp;#10;
-			}&amp;#13;&amp;#10;
-		]&quot;&gt;
-			&lt;i class=&quot;material-icons&quot;&gt;info&lt;/i&gt;
 		&lt;/span&gt;
 		Actions:
 			&lt;textarea id=&quot;cs-acts&quot;&gt;&lt;/textarea&gt;

@@ -25,7 +25,7 @@ The system uses JSON to store and move around the data associated with a map, an
 
 ## Installation
 
-Download the latest version of Blocky Maps from the [releases](https://github.com/cyrusfirheir/BlockyMaps/releases) page and extract the `.zip` file. This includes both the library and the offline version of the editor.
+Download the latest version of Blocky Maps from the [releases](https://github.com/cyrusfirheir/BlockyMaps/releases) page and extract the `BlockyMaps.[versionNumber].zip` file. This includes both the library and the offline version of the editor.
 
 To add it to your project:
 

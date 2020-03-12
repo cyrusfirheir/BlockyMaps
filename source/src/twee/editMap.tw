@@ -67,7 +67,7 @@
 		Columns:
 			<input id="mm-size-cols" type="text">
 
-		<span title="Set the zoom multiplier at which the map is loaded onto screen during play.&#13;&#10;Default value is 1. Recommended to keep between 0.25 and 2.5">
+		<span title="Set the zoom multiplier at which the map is loaded onto screen during play.&#13;&#10;Default value is 100. Recommended to keep between 25 and 250">
 			<i class="material-icons">help</i>
 		</span>
 		Map zoom level:
@@ -126,17 +126,8 @@
 		Inline CSS:
 			<textarea id="cd-inline"></textarea>
 
-		<span title="A list of links that show up for every block on the map.&#13;&#10;Use an array of JSON objects.">
+		<span title="Markup that is rendered to the 'actions' section of the UI for every block.&#13;&#10;Use regular SugarCube code for links/buttons/etc.">
 			<i class="material-icons">help</i>
-		</span>
-		<span title="Example:&#13;&#10;
-		[&#13;&#10;
-			{&#13;&#10;
-				&quot;name&quot;: &quot;Name of link&quot;,&#13;&#10;
-				&quot;func&quot;: &quot;<<SugarCube Macro>>&quot;&#13;&#10;
-			}&#13;&#10;
-		]">
-			<i class="material-icons">info</i>
 		</span>
 		Actions:
 			<textarea id="cd-acts"></textarea>
@@ -185,17 +176,8 @@
 		Inline CSS:
 			<textarea id="cs-inline"></textarea>
 
-		<span title="A list of links that show up for the selected block(s) on the map.&#13;&#10;Use an array of JSON objects.">
+		<span title="Markup that is rendered to the 'actions' section of the UI for the selected block(s).&#13;&#10;Use regular SugarCube code for links/buttons/etc.">
 			<i class="material-icons">help</i>
-		</span>
-		<span title="Example:&#13;&#10;
-		[&#13;&#10;
-			{&#13;&#10;
-				&quot;name&quot;: &quot;Name of link&quot;,&#13;&#10;
-				&quot;func&quot;: &quot;<<SugarCube Macro>>&quot;&#13;&#10;
-			}&#13;&#10;
-		]">
-			<i class="material-icons">info</i>
 		</span>
 		Actions:
 			<textarea id="cs-acts"></textarea>
