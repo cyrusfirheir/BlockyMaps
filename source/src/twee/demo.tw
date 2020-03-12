@@ -6,7 +6,7 @@
 		"rows": 5,
 		"cols": 9
 	},
-	"zoom": 1,
+	"zoom": 100,
 	"cssClass": "cusMap01",
 	"default": {
 		"cssClass": "tiled",
@@ -60,12 +60,7 @@
 		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: azure;\"\n>\nmeeting_room\n</i>",
 		"name": "Exit",
 		"desc": "\nLeave the dorm?",
-		"acts": [
-			{
-				"name": "Leave",
-				"func": "<<run UI.alert(\"Assume that it works because there exists no hall right now. Didn't code it in.\")>>"
-			}
-		]
+		"acts": "<<link \"Leave\">>\n<<run UI.alert(\"Assume that it works because there exists no hall right now. Didn't code it in.\")>>\n<</link>>"
 	},
 	"r2c1": {
 		"cssClass": "tiled player"
@@ -75,16 +70,13 @@
 		"css": "text-shadow: 0 0 1em red;",
 		"name": "Da Bois",
 		"desc": "\nThis is it.\n\nThey're the ones waiting for you... Introduce yourself?",
-		"acts": [
-			{
-				"name": "Doit",
-				"func": "<<run UI.alert(\"Diddit\")>>"
-			}
-		]
+		"acts": "<<link \"Doit\">>\n<<run UI.alert(\"Diddit\")>>\n<</link>>"
 	},
 	"r2c8": {
 		"content": "<i\nclass=\"material-icons\"\nstyle=\"color: lightsteelblue;\"\n>\nwc\n</i>",
-		"cssClass": "wall"
+		"cssClass": "wall",
+		"name": "Restroom",
+		"desc": "\nNot now..."
 	},
 	"r3c0": {
 		"cssClass": "solid wall"

@@ -118,7 +118,7 @@ $(document).on(":obj-ed-open", function() {
 	$("textarea#cd-content").val(_m.default.content);
 	$("input#cd-css").val(_m.default.cssClass);
 	$("textarea#cd-inline").val(_m.default.css);
-	$("textarea#cd-acts").val(JSON.stringify(_m.default.acts, null, "\t"));
+	$("textarea#cd-acts").val(_m.default.acts);
 
 	$("#json-editor").addClass("closed");
 	$("#object-editor").removeClass("closed");
@@ -165,18 +165,7 @@ $("html").on("change", "input, textarea", function() {
 			variables().curMap.default.css = $(this).val();
 			break;
 		case "cd-acts":
-			let _c = $(this).val().replace(/[\r\n]+/g, " ");
-			try {
-				_c = JSON.parse();
-			} catch(error) {
-				setup.notify(
-					`<i class="material-icons">warning</i> Malformed JSON!<br> Reverting to last stable version.`
-					, 3000, "danger"
-				);
-				_c = variables().curMap.default.acts;
-			}
-			variables().curMap.default.acts = _c;
-			$(this).val(_c);
+			variables().curMap.default.acts = $(this).val();
 			break;
 
 		case "cs-name":
@@ -206,18 +195,7 @@ $("html").on("change", "input, textarea", function() {
 			break;
 		case "cs-acts":
 			for (let el of editArr) {
-				let _c = $(this).val().replace(/[\r\n]+/g, " ");
-				try {
-					_c = JSON.parse(_c);
-				} catch(error) {
-					setup.notify(
-						`<i class="material-icons">warning</i> Malformed JSON!<br> Reverting to last stable version.`
-						, 3000, "danger"
-					);
-					_c = variables().curMap[el].acts;
-				}
-				variables().curMap[el].acts = _c;
-				$(this).val(_c);
+				variables().curMap[el].acts = $(this).val();
 			}
 			break;
 	}
@@ -326,8 +304,8 @@ $(document).on(":selection-changed", function() {
 	else $("textarea#cs-inline").val("");
 
 	if (editArr.every(
-		(el, i ,arr) => JSON.stringify(_m[el].acts) === JSON.stringify(_m[arr[0]].acts))
-	) $("textarea#cs-acts").val(JSON.stringify(_m[editArr[0]].acts, null, "\t"));
+		(el, i ,arr) => _m[el].acts === _m[arr[0]].acts)
+	) $("textarea#cs-acts").val(_m[editArr[0]].acts);
 	else $("textarea#cs-acts").val("");
 });
 

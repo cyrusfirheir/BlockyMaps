@@ -2,16 +2,16 @@
 ;(function() {
 	/*
   * Blocky Maps, by Cyrus Firheir; for SugarCube v2
-  * v0.1.0
+  * v1.0.0
   * requires _bm-styles.css and _bm-passage-twee.tw/_bm-passage-twine.txt
   */
 
 	let _bm = {};
 
-	_bm.version = "0.1.0";
+	_bm.version = "v1.0.0";
 
-	/* accepts either valid JSON, or plain JS objects */
 	_bm.drawMap = function(mapObj) {
+		if (!mapObj) return "";
 		if (typeof mapObj === "string") mapObj = JSON.parse(mapObj);
 		variables().curMap = mapObj;
 		let rows = mapObj.size.rows;
@@ -35,11 +35,7 @@
 					content = mapObj[cell].content
 										? mapObj[cell].content : content;
 				}
-				ret += `<span	id="${cell}"
-									class="map-cell	${cssClass? cssClass : _cssClass ? _cssClass : ""}"
-									style="${css ? css : _css ? _css : ""}">
-									<span class="content">${content}</span>
-								</span>`;
+				ret += `<span	id="${cell}" class="map-cell ${cssClass? cssClass : _cssClass ? _cssClass : ""}" style="${css ? css : _css ? _css : ""}"><span class="content">${content}</span></span>`;
 				if (c === cols - 1) ret += `<br>`;
 			}
 		}
@@ -71,26 +67,17 @@
 		});
 	};
 
-	setup.zoomLevel = 1;
+	setup.zoomLevel = 100;
 
-	_bm.mapZoom = function(level = 1) {
+	_bm.mapZoom = function(level = 100) {
 		let _t = $("#map-container");
 		if (!_t.length) return;
 		_t.css({
-			"transform": `scale(${level})`
+			"transform": `scale(${level/100})`
 		});
 	};
 
-	/*
-	pMoveCoords(coords) -> Accepts three kinds of input
-		As a string of the format "r(row)c(column)":
-			pMoveCoords("r0c0");
-		As an array of the format [row, column]:
-			pMoveCoords([0, 2]);
-		As an object of the format {row: row, col: column}:
-			pMoveCoords({row: 2, col: 3});
-	Override can be passed a truthy value so that player can move into a solid block.
-	*/
+
 	_bm.pMoveCoords = function(coords, override=false) {
 		let _p = $("#map-container #map .player");
 		if (!_p.length) return;
@@ -142,7 +129,7 @@
 
 	_bm.gotoMap = function(mapObj) {
 		variables().curMap = mapObj;
-		$.wiki(`<<goto "playMap">>`);
+		$.wiki(`<<goto "bmPlayMap">>`);
 	};
 
 	setup.bm = Object.freeze(_bm);
@@ -160,11 +147,7 @@ $(document).on(":map-moved", function() {
 
 	let _def = variables().curMap.default;
 	if (_def) {
-		if (_def.acts) {
-			$("#map-ui #acts").wiki(_def.acts.reduce((a, c) => {
-				return a + `<<link "${c.name}">>${c.func}<</link>>`;
-			}, ""));
-		}
+		if (_def.acts) $("#map-ui #acts").wiki(_def.acts);
 		if (_def.name) $("#map-ui #name .content").wiki(_def.name);
 		if (_def.desc) $("#map-ui #desc .content").wiki(_def.desc);
 	}
@@ -174,14 +157,11 @@ $(document).on(":map-moved", function() {
 	$("#map-ui #pos .content").empty().wiki(_p);
 
 	let _cur = variables().curMap[_p];
-	if (!_cur) return;
-	if (_cur.acts) {
-		$("#map-ui #acts").empty().wiki(_cur.acts.reduce((a, c) => {
-			return a + `<<link "${c.name}">>${c.func}<</link>>`;
-		}, ""));
+	if (_cur) {
+		if (_cur.acts) $("#map-ui #acts").empty().wiki(_cur.acts);
+		if (_cur.name) $("#map-ui #name .content").empty().wiki(_cur.name);
+		if (_cur.desc) $("#map-ui #desc .content").empty().wiki(_cur.desc);
 	}
-	if (_cur.name) $("#map-ui #name .content").empty().wiki(_cur.name);
-	if (_cur.desc) $("#map-ui #desc .content").empty().wiki(_cur.desc);
 });
 
 $(document).on("keydown", function(ev) {
@@ -199,13 +179,13 @@ $(document).on("keydown", function(ev) {
 			setup.bm.pMove("right");
 			break;
 		case "PageDown":
-			setup.zoomLevel -= 0.1;
-			setup.zoomLevel = setup.zoomLevel.clamp(0.1, 2.5);
+			setup.zoomLevel -= 10;
+			setup.zoomLevel = setup.zoomLevel.clamp(10, 250);
 			setup.bm.mapZoom(setup.zoomLevel);
 			break;
 		case "PageUp":
-			setup.zoomLevel += 0.1;
-			setup.zoomLevel = setup.zoomLevel.clamp(0.1, 2.5);
+			setup.zoomLevel += 10;
+			setup.zoomLevel = setup.zoomLevel.clamp(10, 250);
 			setup.bm.mapZoom(setup.zoomLevel);
 			break;
 	}

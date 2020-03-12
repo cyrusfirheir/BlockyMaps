@@ -6,7 +6,7 @@
 		"rows": 3,
 		"cols": 3
 	},
-	"zoom": 1,
+	"zoom": 100,
 	"default": {
 		"name": "",
 		"desc": ""

@@ -11,7 +11,7 @@ window.exportJSON = function() {
   });
   saveAs(blob, _name + ".json");
 	Dialog.close();
-	setup.notify(`Saved map as '${_name}.json'!`, 3000, "success");
+	setup.notify(`Map exported!`, 3000, "success");
 };
 
 window.dateTimeString = function() {

@@ -35,6 +35,7 @@
   line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
 	transform-origin: 50% 40%;
 	transition: transform 0.1s ease;
+	pointer-events: none;
 }
 
 #map {

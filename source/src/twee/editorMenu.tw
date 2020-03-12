@@ -1,8 +1,15 @@
 :: editor-menu
 
-Blocky Maps v<<= App.version>>
-
+Blocky Maps <<= setup.bm.version>>,
+<br>
+by Cyrus Firheir, for SugarCube v2
 <br><br>
+
+<div class="button-link">
+https://github.com/cyrusfirheir/BlockyMaps
+</div>
+
+<hr>
 
 <<button "Restart with new map">>
 	<<run UI.restart()>>

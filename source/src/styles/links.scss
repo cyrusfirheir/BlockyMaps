@@ -27,7 +27,14 @@ a:active {
   transition: all 0.1s ease-out;
 }
 
-button {
+.button-link {
+	a {
+		text-align: center;
+		width: 100%;
+	}
+}
+
+button, .button-link a {
 	color: $fD;
 	background-color: $bS;
 	border-color: transparent;
