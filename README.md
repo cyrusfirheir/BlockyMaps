@@ -37,7 +37,7 @@ To add it to your project:
 	`bm-styles.css` → `Story StyleSheet`  
 	`bm-passage-twine.txt` → A passage titled 'bmPlayMap'.
 
-- If using a Twee compiler ([Tweego](thttps://www.motoslave.net/tweego/) or [Extwee](https://www.npmjs.com/package/extwee)):
+- If using a Twee compiler ([Tweego](https://www.motoslave.net/tweego/) or [Extwee](https://www.npmjs.com/package/extwee)):
 
 	Copy the following files from the `bm-library` directory into your project source:
 
