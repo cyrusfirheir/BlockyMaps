@@ -6,7 +6,7 @@ window.createMap = function(size = {
 	let retObj = {
 		id: "uniqueMapID",
 		size: size,
-		zoom: 1,
+		zoom: 100,
 		cssClass: "",
 		default: {
 			name: "",

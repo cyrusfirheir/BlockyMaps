@@ -73,7 +73,7 @@
 		Map zoom level:
 			<input id="mm-zoom" type="text">
 
-		<span title="The CSS class to attach to the map as a whole.&#13;&#10;Useful when having different color schemes for different 'regions' in the world.">
+		<span title="The CSS classes (separate by whitespace) to attach to the map as a whole.&#13;&#10;Useful when having different color schemes for different 'regions' in the world.">
 			<i class="material-icons">help</i>
 		</span>
 		Map CSS classes:
@@ -106,7 +106,7 @@
 		Content:
 			<textarea id="cd-content"></textarea>
 
-		<span title="Classes (separate with whitespace) to attach to every block on the map.">
+		<span title="Classes (separate by whitespace) to attach to every block on the map.">
 			<i class="material-icons">help</i>
 		</span>
 		CSS classes:
@@ -159,7 +159,7 @@
 		Content:
 			<textarea id="cs-content"></textarea>
 
-		<span title="Classes (separate with whitespace) to attach to the selected block(s) on the map.">
+		<span title="Classes (separate by whitespace) to attach to the selected block(s) on the map.">
 			<i class="material-icons">help</i>
 		</span>
 		CSS classes:
