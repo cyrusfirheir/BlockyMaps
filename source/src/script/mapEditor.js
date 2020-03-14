@@ -113,12 +113,12 @@ $(document).on(":obj-ed-open", function() {
 	$("input#mm-zoom").val(_m.zoom);
 	$("input#mm-map-css").val(_m.cssClass);
 
-	$("input#cd-name").val(_m.default.name);
-	$("textarea#cd-desc").val(_m.default.desc);
-	$("textarea#cd-content").val(_m.default.content);
-	$("input#cd-css").val(_m.default.cssClass);
-	$("textarea#cd-inline").val(_m.default.css);
-	$("textarea#cd-acts").val(_m.default.acts);
+	$("input#cd-name").val(_m._default.name);
+	$("textarea#cd-desc").val(_m._default.desc);
+	$("textarea#cd-content").val(_m._default.content);
+	$("input#cd-css").val(_m._default.cssClass);
+	$("textarea#cd-inline").val(_m._default.css);
+	$("textarea#cd-acts").val(_m._default.acts);
 
 	$("#json-editor").addClass("closed");
 	$("#object-editor").removeClass("closed");
@@ -150,22 +150,22 @@ $("html").on("change", "input, textarea", function() {
 			break;
 
 		case "cd-name":
-			variables().curMap.default.name = $(this).val();
+			variables().curMap._default.name = $(this).val();
 			break;
 		case "cd-desc":
-			variables().curMap.default.desc = $(this).val();
+			variables().curMap._default.desc = $(this).val();
 			break;
 		case "cd-content":
-			variables().curMap.default.content = $(this).val();
+			variables().curMap._default.content = $(this).val();
 			break;
 		case "cd-css":
-			variables().curMap.default.cssClass = $(this).val();
+			variables().curMap._default.cssClass = $(this).val();
 			break;
 		case "cd-inline":
-			variables().curMap.default.css = $(this).val();
+			variables().curMap._default.css = $(this).val();
 			break;
 		case "cd-acts":
-			variables().curMap.default.acts = $(this).val();
+			variables().curMap._default.acts = $(this).val();
 			break;
 
 		case "cs-name":

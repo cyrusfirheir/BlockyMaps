@@ -62,8 +62,8 @@
 			display: inline-block;
 			top: -0.15em;
 			left: -0.15em;
-			width: 3em;
-			height: 3em;
+			width: inherit;
+			height: inherit;
 			padding: 0.25em;
 
 			.material-icons {
@@ -125,7 +125,7 @@
 	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
   line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
 
-	#acts {
+	#cur-block-acts {
 		position: fixed;
 		z-index: 2200;
 		overflow-y: auto;
@@ -144,7 +144,7 @@
 		}
 	}
 
-	#name {
+	#cur-block-name {
 		position: fixed;
 		z-index: 2200;
 		top: 2em;
@@ -162,7 +162,7 @@
 		background-color: transparentize($color: #000000, $amount: 0.5);
 	}
 
-	#desc {
+	#cur-block-desc {
 		position: fixed;
 		z-index: 2200;
 		top: 8em;
@@ -175,7 +175,7 @@
 		background-color: transparentize($color: #000000, $amount: 0.5);
 	}
 
-	#pos {
+	#cur-block-pos {
 		position: fixed;
 		z-index: 2200;
 		top: 2em;

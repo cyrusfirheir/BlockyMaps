@@ -219,3 +219,18 @@
 		}
 	}
 }
+
+.ttips {
+	&.danger {
+		color: $aD;
+	}
+	&.warn {
+		color: $aW;
+	}
+	&.info {
+		color: $aI;
+	}
+	&.success {
+		color: $aS;
+	}
+}

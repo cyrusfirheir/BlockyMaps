@@ -23,11 +23,11 @@
 				let cell = `r${r}c${c}`;
 				let css, cssClass, _css, _cssClass;
 				let content = "";
-				if (mapObj.default) {
-					_css = mapObj.default.css;
-					_cssClass = mapObj.default.cssClass;
-					content = mapObj.default.content
-										? mapObj.default.content : content;
+				if (mapObj._default) {
+					_css = mapObj._default.css;
+					_cssClass = mapObj._default.cssClass;
+					content = mapObj._default.content
+										? mapObj._default.content : content;
 				}
 				if (mapObj[cell]) {
 					css = mapObj[cell].css;
@@ -141,26 +141,26 @@ $(window).on("resize", () => $(document).trigger(":map-moved"));
 $(document).on(":map-moved", function() {
 	setup.bm.cameraFollow(".player");
 
-	$("#map-ui #acts").empty();
-	$("#map-ui #name .content").empty();
-	$("#map-ui #desc .content").empty();
+	$("#cur-block-acts .content").empty();
+	$("#cur-block-name .content").empty();
+	$("#cur-block-desc .content").empty();
 
-	let _def = variables().curMap.default;
+	let _def = variables().curMap._default;
 	if (_def) {
-		if (_def.acts) $("#map-ui #acts").wiki(_def.acts);
-		if (_def.name) $("#map-ui #name .content").wiki(_def.name);
-		if (_def.desc) $("#map-ui #desc .content").wiki(_def.desc);
+		if (_def.acts) $("#cur-block-acts .content").wiki(_def.acts);
+		if (_def.name) $("#cur-block-name .content").wiki(_def.name);
+		if (_def.desc) $("#cur-block-desc .content").wiki(_def.desc);
 	}
 
 	let _p = $("#map-container #map .player").attr("id");
 	variables().curPos = _p;
-	$("#map-ui #pos .content").empty().wiki(_p);
+	$("#cur-block-pos .content").empty().wiki(_p);
 
 	let _cur = variables().curMap[_p];
 	if (_cur) {
-		if (_cur.acts) $("#map-ui #acts").empty().wiki(_cur.acts);
-		if (_cur.name) $("#map-ui #name .content").empty().wiki(_cur.name);
-		if (_cur.desc) $("#map-ui #desc .content").empty().wiki(_cur.desc);
+		if (_cur.acts) $("#cur-block-acts .content").empty().wiki(_cur.acts);
+		if (_cur.name) $("#cur-block-name .content").empty().wiki(_cur.name);
+		if (_cur.desc) $("#cur-block-desc .content").empty().wiki(_cur.desc);
 	}
 });
 

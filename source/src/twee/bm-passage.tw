@@ -15,16 +15,18 @@
 </div>
 
 <div id="map-ui">
-	<div id="name">
+	<div id="cur-block-name">
 		<div class="content"></div>
 	</div>
-	<div id="desc">
+	<div id="cur-block-desc">
 		<div class="content"></div>
 	</div>
-	<div id="pos">
+	<div id="cur-block-pos">
 		<div class="content"></div>
 	</div>
-	<div id="acts"></div>
+	<div id="cur-block-acts">
+		<div class="content"></div>
+	</div>
 </div>
 
 <<timed 200ms>>

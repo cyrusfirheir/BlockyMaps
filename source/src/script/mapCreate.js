@@ -8,7 +8,7 @@ window.createMap = function(size = {
 		size: size,
 		zoom: 100,
 		cssClass: "",
-		default: {
+		_default: {
 			name: "",
 			desc: "",
 			acts: [],
