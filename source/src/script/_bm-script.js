@@ -1,19 +1,24 @@
 
 ;(function() {
-	/*
+	/**
   * Blocky Maps, by Cyrus Firheir; for SugarCube v2
-  * v1.0.0
-  * requires _bm-styles.css and _bm-passage-twee.tw/_bm-passage-twine.txt
+  * requires _bm-styles.css and _bm-passage.tw/_bm-passage-twine.txt
   */
 
 	let _bm = {};
 
-	_bm.version = "v1.0.0";
+	_bm.version = "v1.0.1";
 
-	_bm.drawMap = function(mapObj) {
+	/**
+	* Returns html for drawing map to screen
+	* @constructor
+	* @param {Object} mapObj - The Map object/JSON to draw on the map.
+	* @param {boolean} [load=true] - Whether to skip loading map into $curMap.
+	*/
+	_bm.drawMap = function(mapObj, load=true) {
 		if (!mapObj) return "";
 		if (typeof mapObj === "string") mapObj = JSON.parse(mapObj);
-		variables().curMap = mapObj;
+		if (load) variables().curMap = mapObj;
 		let rows = mapObj.size.rows;
 		let cols = mapObj.size.cols;
 		let ret = "";
@@ -21,21 +26,13 @@
 		for (let r = 0; r < rows; r++) {
 			for (let c = 0; c < cols; c++) {
 				let cell = `r${r}c${c}`;
-				let css, cssClass, _css, _cssClass;
-				let content = "";
-				if (mapObj._default) {
-					_css = mapObj._default.css;
-					_cssClass = mapObj._default.cssClass;
-					content = mapObj._default.content
-										? mapObj._default.content : content;
-				}
-				if (mapObj[cell]) {
-					css = mapObj[cell].css;
-					cssClass = mapObj[cell].cssClass;
-					content = mapObj[cell].content
-										? mapObj[cell].content : content;
-				}
-				ret += `<span	id="${cell}" class="map-cell ${cssClass? cssClass : _cssClass ? _cssClass : ""}" style="${css ? css : _css ? _css : ""}"><span class="content">${content}</span></span>`;
+				let _o = Object.assign({}, mapObj._default, mapObj[cell]);
+
+				let css = _o.css ? _o.css : "";
+				let cssClass = _o.cssClass ? _o.cssClass : "";
+				let content = _o.content ? _o.content : "";
+
+				ret += `<span	id="${cell}" class="map-cell ${cssClass}" style="${css}"><span class="content">${content}</span></span>`;
 				if (c === cols - 1) ret += `<br>`;
 			}
 		}
@@ -44,6 +41,11 @@
 		return ret;
 	};
 
+	/**
+	* Focuses 'camera' on the target block
+	* @constructor
+	* @param {string} [target="#r0c0"] - The target block.
+	*/
 	_bm.cameraFollow = function(target = "#r0c0") {
 		let _t = $(`#map-container #map ${target}`);
 		if (!_t.length) _t = $(`#map-container #map #r0c0`);
@@ -60,8 +62,8 @@
 		let size = variables().curMap.size;
 
 		_map.css({
-			"top": `calc(${_o[1]} - (${_pos[0]} * ${_h}) - (${_h}/2) - (${_pos[0]} * ${_margin} * 2) - ${_padding})`,
-			"left": `calc(${_o[0]} - (${_pos[1]} * ${_w}) - (${_w}/2) - (${_pos[1]} * ${_margin} * 2) - ${_padding})`,
+			"top": `calc(${_o[1]} - (${_pos[0]} * ${_h}) - (${_h}/2) - (${_pos[0]} * ${_margin} * 2) - (${_padding}*1.5))`,
+			"left": `calc(${_o[0]} - (${_pos[1]} * ${_w}) - (${_w}/2) - (${_pos[1]} * ${_margin} * 2) - (${_padding}*1.5))`,
 			"min-width": `calc((${size.cols} * (${_w} + (${_margin} * 2)) + 1.5em)`,
 			"min-height": `calc((${size.rows} * (${_h} + (${_margin} * 2)) + 1.5em)`
 		});
@@ -69,15 +71,26 @@
 
 	setup.zoomLevel = 100;
 
+	/**
+	* 'Zooms' map in or out.
+	* @constructor
+	* @param {number} [level=100] - Percentage zoom.
+	*/
 	_bm.mapZoom = function(level = 100) {
 		let _t = $("#map-container");
 		if (!_t.length) return;
 		_t.css({
 			"transform": `scale(${level/100})`
 		});
+		$(document).trigger(":map-zoomed");
 	};
 
-
+	/**
+	* Moves the 'player' to the specified coordinates
+	* @constructor
+	* @param {string|Array|Object} coords - Destination coordinates.
+	* @param {boolean} [override=false] - Whether to move into solid block.
+	*/
 	_bm.pMoveCoords = function(coords, override=false) {
 		let _p = $("#map-container #map .player");
 		if (!_p.length) return;
@@ -103,6 +116,12 @@
 		$(document).trigger(":map-moved");
 	};
 
+	/**
+	* Moves 'player' towards specified direction by specified distance.
+	* @constructor
+	* @param {string} dir - Direction of movement either of ["up", "down", "left", "right"].
+	* @param {number} [dist=1] - Distance in amount of blocks to move in specified irection.
+	*/
 	_bm.pMove = function(dir, dist=1) {
 		if (!$("#map-container #map .player").length || variables().mapEdit) return;
 		let rMove = 0;
@@ -127,8 +146,16 @@
 		$(document).trigger(":map-moved");
 	};
 
-	_bm.gotoMap = function(mapObj) {
+	/**
+	* Loads map and plays the 'bmPlayMap' passage to show the map.
+	* @constructor
+	* @param {Object} mapObj - Map Object/JSON.
+	* @param {coords} [coords=""] - Specific coordinates to start the player at when map is loaded.
+	*/
+	_bm.gotoMap = function(mapObj, coords="") {
 		variables().curMap = mapObj;
+		variables().curPos = coords;
+		forget("pCurPos");
 		$.wiki(`<<goto "bmPlayMap">>`);
 	};
 
@@ -136,32 +163,26 @@
 }());
 
 
-$(window).on("resize", () => $(document).trigger(":map-moved"));
+$(window).on("resize", () => setTimeout(() => $(document).trigger(":map-moved"), 200));
 
 $(document).on(":map-moved", function() {
 	setup.bm.cameraFollow(".player");
 
-	$("#cur-block-acts .content").empty();
-	$("#cur-block-name .content").empty();
-	$("#cur-block-desc .content").empty();
-
 	let _def = variables().curMap._default;
-	if (_def) {
-		if (_def.acts) $("#cur-block-acts .content").wiki(_def.acts);
-		if (_def.name) $("#cur-block-name .content").wiki(_def.name);
-		if (_def.desc) $("#cur-block-desc .content").wiki(_def.desc);
-	}
 
 	let _p = $("#map-container #map .player").attr("id");
 	variables().curPos = _p;
 	$("#cur-block-pos .content").empty().wiki(_p);
-
 	let _cur = variables().curMap[_p];
-	if (_cur) {
-		if (_cur.acts) $("#cur-block-acts .content").empty().wiki(_cur.acts);
-		if (_cur.name) $("#cur-block-name .content").empty().wiki(_cur.name);
-		if (_cur.desc) $("#cur-block-desc .content").empty().wiki(_cur.desc);
-	}
+
+	let _o = Object.assign({}, _def, _cur);
+
+	$("#cur-block-name .content").empty().wiki(_o.name ? _o.name : "");
+	$("#cur-block-desc .content").empty().wiki(_o.desc ? _o.desc : "");
+	$("#cur-block-acts .content").empty().wiki(_o.acts ? _o.acts.replace(/[\r\n]+/g, " ") : "");
+	$.wiki(_o.trig ? _o.trig : "");
+
+	memorize("pCurPos", _p);
 });
 
 $(document).on("keydown", function(ev) {

@@ -131,6 +131,21 @@
 	background-color: transparentize($color: #000000, $amount: 0.25);
 	border: 1px solid $fD;
 
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		button {
+			color: $aD;
+			font-size: 0.75em;
+
+			&:disabled {
+				color: $bD;
+				background-color: $bS;
+			}
+		}
+	}
+
 	.content {
 		user-select: all;
 		font-size: 0.75em;
@@ -160,6 +175,7 @@
 		pointer-events: all;
 		font-size: 0.75em;
 		text-transform: uppercase;
+		font-weight: bold;
 		padding: 1em 0;
 
 		&:hover {
@@ -180,8 +196,24 @@
 		margin-top: -0.5em;
 		margin-left: 0.5em;
 		margin-bottom: 1.5em;
-		max-height: calc(100% - 13em);
+		min-width: calc(100% - 0.5em);
+		max-height: calc(100% - 9em);
 		overflow-y: auto;
+		resize: horizontal;
+	}
+
+	fieldset {
+		display: block;
+    border: 0.15rem solid $bD;
+		margin-top: 0.25em;
+		margin-left: 1em;
+		margin-bottom: 0.5em;
+		padding: 0.5em;
+		min-height: 10em;
+    background-color: $bS;
+    color: $fD;
+		overflow-y: auto;
+		resize: vertical;
 	}
 
 	div {

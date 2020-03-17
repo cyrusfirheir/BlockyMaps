@@ -49,6 +49,7 @@
 
 	.map-cell {
 		position: relative;
+		z-index: 50;
 		display: inline-block;
 		width: 3em;
 		height: 3em;
@@ -73,6 +74,16 @@
 
 		&.wall {
 			border-color: #3e4f59;
+			background-color: #263238;
+		}
+
+		&.exit {
+			border-color: #c1d5e0;
+		}
+
+		&.invisible {
+			border-color: transparent;
+			background: none;
 		}
 
 		&.player {
@@ -80,42 +91,16 @@
 			z-index: 100;
 			border-color: #e35183;
 			transition: border-color 0s;
-			overflow: hidden;
 
-			&::before, &::after {
-				content: "";
-				position: absolute;
-				top: 0.75em;
-				width: 6em;
-				height: 1em;
-				border-radius: 0;
-				background-color: #e35183;
-				opacity: 0.5;
-				transform: rotate(-45deg);
-				animation: shine 1s ease infinite;
-			}
-			&::after {
-				animation: shine 2s ease infinite;
-			}
-		}
-
-		&.invisible {
-			border-color: transparent;
-			background: none;
-		}
+			background: repeating-linear-gradient(-45deg, transparentize(#e35183, 0.5) 0 1em, transparent 1em 2em);
+      background-size: 200% 200%;
+			animation: back-pattern-shift 1s ease infinite;
+		}		
 	}
 }
 
-@keyframes shine {
-	0% {
-		left: -5.5em;
-	}
-	50% {
-		left: 2.5em;
-	}
-	100% {
-		left: 2.5em;
-	}
+@keyframes back-pattern-shift {
+	100% { background-position: 100% 100%; }
 }
 
 #map-ui {
@@ -125,22 +110,28 @@
 	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
   line-height: calc(1.3em + (2 - 1.5) * ((100vw - 300px) / (1600 - 300)));
 
-	#cur-block-acts {
-		position: fixed;
-		z-index: 2200;
-		overflow-y: auto;
-		bottom: 2em;
-		right: 2em;
-		width: calc(40% - 2em);
-		min-height: 2em;
-		max-height: calc(100% - 4em);
-		padding: 0.5em;
+	div {
+		pointer-events: all;
+	}
 
-		a {
-			display: block;
-			pointer-events: all;
-			width: 100%;
-			margin: 0.25em 0;
+	#cur-block-acts {
+		.content {
+			position: fixed;
+			z-index: 2200;
+			overflow-y: auto;
+			bottom: 2em;
+			right: 2em;
+			width: calc(40% - 2em);
+			min-height: 2em;
+			max-height: calc(100% - 4em);
+			padding: 0.5em;
+
+			a {
+				display: block;
+				pointer-events: all;
+				width: 100%;
+				margin: 0.25em 0;
+			}
 		}
 	}
 
@@ -156,10 +147,12 @@
 		.content {
 			font-style: italic;
 			font-weight: bold;
+			overflow-y: auto;
 		}
 
 		border-left: 0.15em solid #c1d5e0;
 		background-color: transparentize($color: #000000, $amount: 0.5);
+		backdrop-filter: blur(0.25em) brightness(0.75);
 	}
 
 	#cur-block-desc {
@@ -169,10 +162,16 @@
 		left: 2em;
 		width: 30%;
 		bottom: 2em;
-		padding: 0.25em;
+		padding: 0.5em 0.75em;
+		overflow-y: auto;
 
 		border-left: 0.15em solid #c1d5e0;
 		background-color: transparentize($color: #000000, $amount: 0.5);
+		backdrop-filter: blur(0.25em) brightness(0.75);
+
+		.content {
+			font-size: 0.8em;
+		}
 	}
 
 	#cur-block-pos {
@@ -183,5 +182,6 @@
 		padding: 0.25em;
 
 		background-color: transparentize($color: #000000, $amount: 0.5);
+		backdrop-filter: blur(0.25em) brightness(0.75);
 	}
 }

@@ -5,8 +5,8 @@ a, a:visited {
   display: inline-block;
   user-select: none;
   line-height: 2;
-  color: $fD;
-  background: $sS;
+  color: $fS;
+  background: $sD;
   padding: 0.25rem 1rem;
   margin: 1rem 0;
   box-shadow: 1px 1px 0.25rem $shD;
@@ -15,7 +15,7 @@ a, a:visited {
 
 a:hover {
   text-decoration: none;
-  color: $fD;
+  color: $fS;
   position: relative;
   z-index: 5;
   box-shadow: 2px 2px 0.5rem $shD;

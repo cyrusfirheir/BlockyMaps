@@ -11,7 +11,8 @@ window.createMap = function(size = {
 		_default: {
 			name: "",
 			desc: "",
-			acts: [],
+			acts: "",
+			trig: "",
 			content: "",
 			cssClass: "",
 			css: ""
@@ -23,7 +24,8 @@ window.createMap = function(size = {
 			retObj[cell] = {
 				name: "",
 				desc: "",
-				acts: [],
+				acts: "",
+				trig: "",
 				content: "",
 				cssClass: "",
 				css: ""

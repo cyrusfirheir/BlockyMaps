@@ -4,8 +4,7 @@ Config.passages.nobr = true;
 Config.passages.transitionOut = 10;
 
 window.App = {
-	debug: true,
-	version: "0.1.0"
+	debug: true
 };
 
 //debug keyboard toggles

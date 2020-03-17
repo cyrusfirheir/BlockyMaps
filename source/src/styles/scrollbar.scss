@@ -8,6 +8,7 @@
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
+	border-radius: 0.5rem;
 
 	&:hover {
 		background: $b;
@@ -22,4 +23,14 @@
 	&:hover {
 		background: $sD;
 	}
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+
+::-webkit-resizer {
+	background-color: $bS;
+	border: 1px solid $sD;
+	border-radius: 50%;
 }

@@ -24,6 +24,7 @@ window.mapEditorInit = function() {
 		lint: true,
 		theme: "material-palenight"
 	});
+	$(document).trigger(":selection-changed");
 	$(document).trigger(":obj-ed-open");
 	$("#current-edit-array .content").text(editArr.join(", "));
 };
@@ -45,7 +46,7 @@ $("html").on("click", "#re-center-map", () => {
 
 $("html").on("click", "#play-map", () => {
 	variables().editorMode = true;
-	$.wiki(`<<goto "bmPlayMap">>`);
+	setup.bm.gotoMap(variables().curMap);
 });
 
 $("html").on("click", "#map-editor-link", () => {
@@ -113,13 +114,6 @@ $(document).on(":obj-ed-open", function() {
 	$("input#mm-zoom").val(_m.zoom);
 	$("input#mm-map-css").val(_m.cssClass);
 
-	$("input#cd-name").val(_m._default.name);
-	$("textarea#cd-desc").val(_m._default.desc);
-	$("textarea#cd-content").val(_m._default.content);
-	$("input#cd-css").val(_m._default.cssClass);
-	$("textarea#cd-inline").val(_m._default.css);
-	$("textarea#cd-acts").val(_m._default.acts);
-
 	$("#json-editor").addClass("closed");
 	$("#object-editor").removeClass("closed");
 	$("#edit-map").attr("title", "Edit raw JSON");
@@ -147,25 +141,6 @@ $("html").on("change", "input, textarea", function() {
 			break;
 		case "mm-map-css":
 			variables().curMap.cssClass = $(this).val();
-			break;
-
-		case "cd-name":
-			variables().curMap._default.name = $(this).val();
-			break;
-		case "cd-desc":
-			variables().curMap._default.desc = $(this).val();
-			break;
-		case "cd-content":
-			variables().curMap._default.content = $(this).val();
-			break;
-		case "cd-css":
-			variables().curMap._default.cssClass = $(this).val();
-			break;
-		case "cd-inline":
-			variables().curMap._default.css = $(this).val();
-			break;
-		case "cd-acts":
-			variables().curMap._default.acts = $(this).val();
 			break;
 
 		case "cs-name":
@@ -196,6 +171,11 @@ $("html").on("change", "input, textarea", function() {
 		case "cs-acts":
 			for (let el of editArr) {
 				variables().curMap[el].acts = $(this).val();
+			}
+			break;
+		case "cs-triggers":
+			for (let el of editArr) {
+				variables().curMap[el].trig = $(this).val();
 			}
 			break;
 	}
@@ -271,9 +251,14 @@ $(document).on(":selection-changed", function() {
 								.toArray()
 								.map( el => el.id );
 
-	$("#current-edit-array .content").text(editArr.join(", "));
+	if (editArr.length === 0) {
+		editArr = ["_default"];
+		$("#current-edit-array button").prop("disabled", true);
+	} else {
+		$("#current-edit-array button").prop("disabled", false);
+	}
 
-	if (editArr.length === 0) return;
+	$("#current-edit-array .content").text(editArr.join(", "));
 
 	let _m = variables().curMap;
 	_m = Object.assign(createMap(_m.size), _m);
@@ -307,6 +292,11 @@ $(document).on(":selection-changed", function() {
 		(el, i ,arr) => _m[el].acts === _m[arr[0]].acts)
 	) $("textarea#cs-acts").val(_m[editArr[0]].acts);
 	else $("textarea#cs-acts").val("");
+
+	if (editArr.every(
+		(el, i ,arr) => _m[el].trig === _m[arr[0]].trig)
+	) $("textarea#cs-triggers").val(_m[editArr[0]].trig);
+	else $("textarea#cs-triggers").val("");
 });
 
 

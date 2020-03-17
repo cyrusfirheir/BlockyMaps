@@ -31,7 +31,9 @@
 
 <<timed 200ms>>
 	<<script>>
-		setup.bm.pMove("up", 0);
+		variables().curPos = recall("pCurPos", "");
+		if (variables().curPos) setup.bm.pMoveCoords(variables().curPos, true);
+		else setup.bm.pMove("up", 0);
 		setup.zoomLevel = variables().curMap.zoom;
 		setup.bm.mapZoom(setup.zoomLevel);
 		$("#loading-cover").removeClass("closed");

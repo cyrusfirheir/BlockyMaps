@@ -47,6 +47,16 @@
 
 
 <div id="current-edit-array">
+	<div>
+	SELECTED BLOCKS:
+	<<button "Clear selection">>
+		<<script>>
+			$(".editing").removeClass("editing");
+			editArr = [];
+			$(document).trigger(":selection-changed");
+		<</script>>
+	<</button>>
+	</div>
 	<span class="content"></span>
 </div>
 
@@ -81,75 +91,22 @@
 	</div>
 
 
-	<h6>Default block properties</h6>
-	<div id="cell-default">
-
-		<span title="Default text shown to the player on every block on the map as the name of the place represented by the map.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		Name:
-			<input id="cd-name" type="text">
-
-		<span title="Default text shown to the player on every block on the map as the description of the place represented by the map.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		Description:
-			<textarea id="cd-desc"></textarea>
-
-		<span title="Default 'content'(images/icons) which shows up on every block.&#13;&#10;Use plain html markup.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		<span title="Example:&#13;&#10;
-		<img src=&quot;images/icon.png&quot;>">
-			<i class="material-icons ttips info">info</i>
-		</span>
-		Content:
-			<textarea id="cd-content"></textarea>
-
-		<span title="Classes (separate by whitespace) to attach to every block on the map.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		CSS classes:
-			<input id="cd-css" type="text">
-
-		<span title="Inline styling for every block on the map.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		<span title="Example:&#13;&#10;
-		background-color: red;&#13;&#10;
-		border-color: white;">
-			<i class="material-icons ttips info">info</i>
-		</span>
-		<span title="ONLY for testing purposes.&#13;&#10;NOT recommended for actual use; use a CSS class instead.">
-			<i class="material-icons ttips warn">warning</i>
-		</span>
-		Inline CSS:
-			<textarea id="cd-inline"></textarea>
-
-		<span title="Markup that is rendered to the 'actions' section of the UI for every block.&#13;&#10;Use regular SugarCube code for links/buttons/etc.">
-			<i class="material-icons ttips info">help</i>
-		</span>
-		Actions:
-			<textarea id="cd-acts"></textarea>
-
-	</div>
-
-	<h6>Selected block properties</h6>
+	<h6>Block properties</h6>
 	<div id="cell-selected">
 
-		<span title="Text shown to the player for the selected block(s) on the map as the name of the place represented by block.">
+		<span title="Text shown to the player for the selected blocks on the map as the name of the place represented by block.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		Name:
 			<input id="cs-name" type="text">
 
-		<span title="Text shown to the player for the selected block(s) on the map as the description of the place represented by block.">
+		<span title="Text shown to the player for the selected blocks on the map as the description of the place represented by block.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		Description:
 			<textarea id="cs-desc"></textarea>
 
-		<span title="'Content'(images/icons) which shows up on the selected block(s).&#13;&#10;Use plain html markup.">
+		<span title="'Content'(images/icons) which shows up on the selected blocks.&#13;&#10;Use plain html markup.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		<span title="Example:&#13;&#10;
@@ -159,13 +116,13 @@
 		Content:
 			<textarea id="cs-content"></textarea>
 
-		<span title="Classes (separate by whitespace) to attach to the selected block(s) on the map.">
+		<span title="Classes (separate by whitespace) to attach to the selected blocks on the map.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		CSS classes:
 			<input id="cs-css" type="text">
 
-		<span title="Inline styling for the selected block(s) on the map.">
+		<span title="Inline styling for the selected blocks on the map.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		<span title="Example:&#13;&#10;
@@ -176,11 +133,17 @@
 		Inline CSS:
 			<textarea id="cs-inline"></textarea>
 
-		<span title="Markup that is rendered to the 'actions' section of the UI for the selected block(s).&#13;&#10;Use regular SugarCube code for links/buttons/etc.">
+		<span title="Markup that is rendered to the 'actions' section of the UI for the selected blocks.&#13;&#10;Use-case: Links/buttons/etc using regular SugarCube/Html code.">
 			<i class="material-icons ttips info">help</i>
 		</span>
 		Actions:
 			<textarea id="cs-acts"></textarea>
+
+		<span title="SugarCube code that is run when the player is on the selected blocks.">
+			<i class="material-icons ttips info">help</i>
+		</span>
+		Triggers:
+			<textarea id="cs-triggers"></textarea>
 
 	</div>
 
